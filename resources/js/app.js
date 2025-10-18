@@ -1,5 +1,8 @@
 // resources/js/app.js
 import "./bootstrap";
+import Chart from "chart.js/auto";
+window.Chart = Chart;
+import "./chart.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.getElementById("login-form");

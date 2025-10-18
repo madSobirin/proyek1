@@ -23,6 +23,10 @@
         </div>
     </main>
 </body>
+{{-- Ini src chart --}}
+@vite(['resources/js/app.js'])
+
+{{-- Ini sidebar Responsive --}}
 <script src="{{ asset('js/sidebar.js') }}"></script>
 
 </html>
