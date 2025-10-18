@@ -3,7 +3,7 @@
     class="fixed top-0 left-0 w-64 h-screen bg-posyanduDark text-white transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40">
     <div class="p-4 border-b border-white">
         <div class="flex items-center space-x-3">
-            <img src="img/elsimil.png" alt="logo Sipos" class="w-13 h-13 object-contain">
+            <img src="{{ asset('img/elsimil.png') }}" alt="logo Sipos" class="w-13 h-13 object-contain">
             <h1 class="text-xl font-bold text-white">SIPOS</h1>
         </div>
         <p class="text-white text-sm">Sistem Informasi Posyandu</p>
@@ -36,11 +36,14 @@
     </nav>
 
     <div class="absolute bottom-0 w-full p-4 border-t border-white">
-        <a href="{{ url('/logout') }}"
-            class="flex items-center p-3 text-gray-300 hover:bg-posyanduu hover:text-white rounded">
-            <i class="fas fa-sign-out-alt w-5"></i>
-            <span class="ml-3">Logout</span>
-        </a>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit"
+                class="flex items-center w-full text-gray-300 hover:bg-posyanduu hover:text-white rounded p-3">
+                <i class="fas fa-sign-out-alt w-5"></i>
+                <span class="ml-3">Logout</span>
+            </button>
+        </form>
     </div>
 </aside>
 
