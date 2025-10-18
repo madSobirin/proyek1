@@ -11,10 +11,12 @@
 
     <div class="p-4 flex items-center border-b border-white">
         <div class="rounded-full w-12 h-12 bg-posyanduu flex items-center justify-center">
-            <span class="font-bold">KA</span>
+            <span class="font-bold">
+                {{ collect(explode(' ', Auth::user()->name))->map(fn($n) => strtoupper($n[0]))->join('') }}
+            </span>
         </div>
         <div class="ml-3">
-            <p class="font-medium">Kader Posyandu</p>
+            <p class="font-medium">{{ Auth::user()->name }}</p>
         </div>
     </div>
 
@@ -48,22 +50,25 @@
 </aside>
 
 <!-- Overlay untuk mobile -->
-<div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-30"></div>
+<div id="overlay" class="fixed inset-0 bg-transparent bg-opacity-20 hidden z-30"></div>
 
 <!-- HEADER -->
 <header class="fixed top-0 left-0 right-0 bg-gray-100 shadow flex justify-between items-center md:pl-64">
     <!-- Tombol hamburger untuk mobile -->
-    <button id="menu-btn" class="md:hidden p-2 text-gray-600">
-        <i class="fas fa-bars"></i>
+    <button id="menu-btn" class="md:hidden p-2 text-gray-600 ">
+        <i class="fa-solid fa-bars fa-xl"></i>
     </button>
 
     <!-- Profil user / admin -->
     <div class="flex items-center space-x-2 ml-auto border-b border-white p-2">
         <div class="rounded-full w-10 h-10 bg-posyanduu flex items-center justify-center">
-            <span class="font-bold text-white">KA</span>
+            <span class="font-bold text-white">
+                {{ collect(explode(' ', Auth::user()->name))->map(fn($n) => strtoupper($n[0]))->join('') }}
+            </span>
         </div>
+
         <div class="flex items-center space-x-1">
-            <h1 class="text-md font-bold text-gray-600">Admin</h1>
+            <h1 class="text-md font-bold text-gray-600">{{ Auth::user()->role }}</h1>
             <i class="fas fa-chevron-down text-gray-600 text-xs md:block"></i>
         </div>
     </div>

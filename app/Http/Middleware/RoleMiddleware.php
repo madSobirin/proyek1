@@ -18,7 +18,7 @@ class RoleMiddleware
     }
 
     if ($user->role !== $role) {
-      abort(403, 'Akses ditolak. Anda tidak memiliki izin.');
+      abort(403, 'Not Found');
     }
 
     return $next($request);
