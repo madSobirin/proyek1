@@ -10,11 +10,11 @@
                 </p>
             </div>
             <div class="flex space-x-2">
-                <button
-                    class="bg-button hover:bg-buttonhover transition-colors duration-200
- text-white px-4 py-2 rounded-lg flex items-center">
+                <a href="{{ url('data/tambah') }}"
+                    class="bg-button hover:bg-buttonhover transition-colors duration-200 text-white px-4 py-2 rounded-lg flex items-center">
                     <i class="fas fa-plus mr-2"></i> Tambah Data
-                </button>
+                </a>
+
             </div>
         </div>
 
@@ -65,7 +65,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y">
+                        <tbody class="divide-y text-gray-800">
                             <tr>
                                 <td class="py-4">
                                     <div class="flex items-center">

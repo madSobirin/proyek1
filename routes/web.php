@@ -29,3 +29,6 @@ Route::middleware(['auth', 'role:pengguna'])->prefix('pengguna')->group(function
 Route::get('/data', function () {
     return view('kader.data-peserta');
 });
+Route::get('/data/tambah', function () {
+    return view('kader.tambah-data');
+});

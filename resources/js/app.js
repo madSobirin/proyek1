@@ -5,6 +5,7 @@ window.Chart = Chart;
 import "./chart.js";
 import "./tab.js";
 import "./sidebar.js";
+import "./tambahd.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.getElementById("login-form");
