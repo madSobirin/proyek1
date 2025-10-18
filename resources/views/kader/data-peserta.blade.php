@@ -66,41 +66,34 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y text-gray-800">
-                            <tr>
-                                <td class="py-4">
-                                    <div class="flex items-center">
-                                        <div
-                                            class="rounded-full w-10 h-10 bg-blue-100 flex items-center justify-center mr-3">
-                                            <i class="fas fa-baby text-blue-500"></i>
-                                        </div>
-                                        <div>
-                                            <p>
-                                                3212192909030001
-                                            </p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="py-4">
-                                    Ahmad Sutisna
-                                </td>
-                                <td class="py-4">2 tahun 3 bulan</td>
-                                <td class="py-4">Laki-Laki</td>
-                                <td class="py-4">
-                                    Ds Sukadadi
-                                </td>
-                                <td class="py-4">Budi Santoso</td>
-                                <td class="py-4">
-                                    <div class="flex space-x-2">
-                                        <button class="text-warning hover:text-yellow-600">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="text-danger hover:text-red-600">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+                            @isset($balitas)
+                                @forelse ($balitas as $balita)
+                                    <tr>
+                                        <td class="py-4">{{ $balita->nik }}</td>
+                                        <td class="py-4">{{ $balita->nama_balita }}</td>
+                                        <td class="py-4">{{ $balita->tahun }} tahun {{ $balita->bulan }} bulan</td>
+                                        <td class="py-4">{{ $balita->jenis_kelamin }}</td>
+                                        <td class="py-4">{{ $balita->alamat }}</td>
+                                        <td class="py-4">{{ $balita->nama_orang_tua }}</td>
+                                        <td class="py-4 text-center">—</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="7" class="py-6 text-center text-gray-500">
+                                            <i class="fas fa-info-circle mr-2"></i> Tidak ada data balita yang tersedia
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            @else
+                                <tr>
+                                    <td colspan="7" class="py-6 text-center text-gray-500">
+                                        <i class="fas fa-info-circle mr-2"></i> Data belum diinisialisasi
+                                    </td>
+                                </tr>
+                            @endisset
                         </tbody>
+
+
                     </table>
                 </div>
 
@@ -158,39 +151,58 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y">
-                            <tr>
-                                <td class="py-4">
-                                    <div class="flex items-center">
-                                        <div
-                                            class="rounded-full w-10 h-10 bg-purple-100 flex items-center justify-center mr-3">
-                                            <i class="fas fa-female text-purple-500"></i>
+                        @php
+                            $ibus = $ibus ?? [];
+                        @endphp
+
+                        <tbody class="divide-y text-gray-800">
+                            @forelse ($ibus as $ibu)
+                                <tr>
+                                    <td class="py-4">
+                                        <div class="flex items-center">
+                                            <div
+                                                class="rounded-full w-10 h-10 bg-purple-100 flex items-center justify-center mr-3">
+                                                <i class="fas fa-female text-purple-500"></i>
+                                            </div>
+                                            <div>
+                                                <p>{{ $ibu->nik }}</p>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <p>
-                                                3212192909030001
-                                            </p>
+                                    </td>
+
+                                    <td class="py-4">{{ $ibu->nama_ibu }}</td>
+                                    <td class="py-4">{{ $ibu->nama_suami }}</td>
+                                    <td class="py-4">{{ $ibu->umur }}</td>
+                                    <td class="py-4">{{ $ibu->alamat }}</td>
+
+                                    <td class="py-4">
+                                        <div class="flex space-x-2">
+                                            <a href="{{ route('ibu.edit', $ibu->id) }}"
+                                                class="text-warning hover:text-yellow-600">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+
+                                            <form action="{{ route('ibu.destroy', $ibu->id) }}" method="POST"
+                                                onsubmit="return confirm('Yakin ingin menghapus data ini?')"
+                                                class="inline-block">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-danger hover:text-red-600">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
                                         </div>
-                                    </div>
-                                </td>
-                                <td class="py-4">Rokenti</td>
-                                <td class="py-4">Carudin</td>
-                                </td>
-                                <td class="py-4">39</td>
-                                <td class="py-4">Arahan
-                                </td>
-                                <td class="py-4">
-                                    <div class="flex space-x-2">
-                                        <button class="text-warning hover:text-yellow-600">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="text-danger hover:text-red-600">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="py-6 text-center text-gray-500">
+                                        <i class="fas fa-info-circle mr-2"></i> Tidak ada data ibu hamil yang tersedia
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
+
                     </table>
                 </div>
 
