@@ -1,426 +1,429 @@
 <!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard - Sistem Posyandu Modern</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              primary: "#4F46E5",
-              secondary: "#10B981",
-              posyandu: "#4F46E5",
-              posyanduLight: "#818CF8",
-              posyanduDark: "#3730A3",
-              danger: "#EF4444",
-              warning: "#F59E0B",
-              success: "#10B981",
-            },
-          },
-        },
-      };
-    </script>
-    <style>
-      body {
-        font-family: "Poppins", sans-serif;
-      }
-      .sidebar {
-        transition: all 0.3s ease;
-      }
-      @media (max-width: 768px) {
-        .sidebar {
-          transform: translateX(-100%);
-          position: fixed;
-          z-index: 50;
-          height: 100vh;
-        }
-        .sidebar.active {
-          transform: translateX(0);
-        }
-        .overlay {
-          display: none;
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-color: rgba(0, 0, 0, 0.5);
-          z-index: 40;
-        }
-        .overlay.active {
-          display: block;
-        }
-      }
-      .card-shadow {
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-          0 2px 4px -1px rgba(0, 0, 0, 0.06);
-      }
-    </style>
-  </head>
-  <body class="bg-gray-100">
-    <!-- Overlay for mobile -->
-    <div class="overlay" id="overlay"></div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Dashboard - Sistem Posyandu Modern</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: "#4F46E5",
+                            secondary: "#10B981",
+                            posyandu: "#4F46E5",
+                            posyanduLight: "#818CF8",
+                            posyanduDark: "#3730A3",
+                            danger: "#EF4444",
+                            warning: "#F59E0B",
+                            success: "#10B981",
+                        },
+                    },
+                },
+            };
+        </script>
+        <style>
+            body {
+                font-family: "Poppins", sans-serif;
+            }
+            .sidebar {
+                transition: all 0.3s ease;
+            }
+            @media (max-width: 768px) {
+                .sidebar {
+                    transform: translateX(-100%);
+                    position: fixed;
+                    z-index: 50;
+                    height: 100vh;
+                }
+                .sidebar.active {
+                    transform: translateX(0);
+                }
+                .overlay {
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    z-index: 40;
+                }
+                .overlay.active {
+                    display: block;
+                }
+            }
+            .card-shadow {
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            }
+        </style>
+    </head>
+    <body class="bg-gray-100">
+        <!-- Overlay for mobile -->
+        <div class="overlay" id="overlay"></div>
 
-    <div class="flex">
-      <!-- Sidebar/Navbar -->
-      <div class="sidebar w-64 bg-posyanduDark text-white h-screen fixed">
-        <div class="p-4 border-b border-posyanduLight">
-          <h1 class="text-xl font-bold">SIPOS</h1>
-          <p class="text-posyanduLight text-sm">Sistem Informasi Posyandu</p>
+        <div class="flex">
+            <!-- Sidebar/Navbar -->
+            <div class="sidebar w-64 bg-posyanduDark text-white h-screen fixed">
+                <div class="p-4 border-b border-posyanduLight">
+                    <h1 class="text-xl font-bold">SIPOS</h1>
+                    <p class="text-posyanduLight text-sm">
+                        Sistem Informasi Posyandu
+                    </p>
+                </div>
+
+                <div
+                    class="p-4 flex items-center border-b border-posyanduLight"
+                >
+                    <div
+                        class="rounded-full w-12 h-12 bg-posyanduLight flex items-center justify-center"
+                    >
+                        <span class="font-bold">KA</span>
+                    </div>
+                    <div class="ml-3">
+                        <p class="font-medium">Kader Posyandu</p>
+                    </div>
+                </div>
+
+                <nav class="mt-4">
+                    <div>
+                        <a
+                            href="#"
+                            class="flex items-center p-3 bg-posyandu text-white"
+                        >
+                            <i class="fas fa-home w-5"></i>
+                            <span class="ml-3">Dashboard</span>
+                        </a>
+
+                        <a
+                            href="balita.html"
+                            class="flex items-center p-3 text-gray-300 hover:bg-posyandu hover:text-white"
+                        >
+                            <i class="fas fa-baby w-5"></i>
+                            <span class="ml-3">Data Peserta</span>
+                        </a>
+                        <a
+                            href="pemeriksaan.html"
+                            class="flex items-center p-3 text-gray-300 hover:bg-posyandu hover:text-white"
+                        >
+                            <i class="fas fa-stethoscope w-5"></i>
+                            <span class="ml-3">Pemeriksaan</span>
+                        </a>
+                    </div>
+                </nav>
+
+                <div
+                    class="absolute bottom-0 w-full p-4 border-t border-posyanduLight"
+                >
+                    <a
+                        href="#"
+                        class="flex items-center p-3 text-gray-300 hover:bg-posyandu hover:text-white rounded"
+                    >
+                        <i class="fas fa-sign-out-alt w-5"></i>
+                        <span class="ml-3">Logout</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="ml-0 md:ml-64 flex-1 min-h-screen">
+                <!-- Top Header -->
+                <header
+                    class="bg-white shadow-sm p-4 flex justify-between items-center"
+                >
+                    <button id="menu-toggle" class="md:hidden text-gray-600">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+
+                    <div class="relative mx-4 flex-1 max-w-xl">
+                        <div
+                            class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                        >
+                            <i class="fas fa-search text-gray-400"></i>
+                        </div>
+                        <input
+                            type="text"
+                            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-posyandu focus:border-posyandu"
+                            placeholder="Cari data..."
+                        />
+                    </div>
+
+                    <div class="flex items-center">
+                        <div class="ml-4 relative">
+                            <button
+                                class="flex items-center focus:outline-none"
+                            >
+                                <div
+                                    class="rounded-full w-10 h-10 bg-posyanduLight flex items-center justify-center text-white"
+                                >
+                                    <span class="font-bold">KA</span>
+                                </div>
+                                <span class="ml-2 text-gray-700 hidden md:block"
+                                    >Kader</span
+                                >
+                                <i
+                                    class="fas fa-chevron-down ml-1 text-gray-600 text-xs hidden md:block"
+                                ></i>
+                            </button>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Main Content -->
+                <main class="p-4 md:p-6">
+                    <div class="mb-6">
+                        <h1 class="text-2xl font-bold text-gray-800">
+                            Dashboard
+                        </h1>
+                        <p class="text-gray-600">
+                            Ringkasan data dan aktivitas posyandu terbaru
+                        </p>
+                    </div>
+
+                    <!-- Stats Grid -->
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 md:gap-6 mb-6"
+                    >
+                        <div class="bg-white rounded-xl p-4 card-shadow">
+                            <div class="flex items-center">
+                                <div class="rounded-lg bg-blue-100 p-3">
+                                    <i
+                                        class="fas fa-baby text-2xl text-posyandu"
+                                    ></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-gray-500 text-sm">
+                                        Total Balita
+                                    </p>
+                                    <h3 class="text-2xl font-bold">100</h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-4 card-shadow">
+                            <div class="flex items-center">
+                                <div class="rounded-lg bg-green-100 p-3">
+                                    <i
+                                        class="fas fa-female text-2xl text-success"
+                                    ></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-gray-500 text-sm">
+                                        Ibu Hamil
+                                    </p>
+                                    <h3 class="text-2xl font-bold">28</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Section -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                        <!-- Status Gizi Balita Chart -->
+                        <div class="bg-white rounded-xl p-4 md:p-6 card-shadow">
+                            <div class="flex justify-between items-center mb-4">
+                                <h2 class="text-lg font-bold text-gray-800">
+                                    Status Gizi Balita
+                                </h2>
+                            </div>
+                            <div class="h-64">
+                                <canvas id="giziChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Kondisi Ibu Hamil Chart -->
+                        <div class="bg-white rounded-xl p-4 md:p-6 card-shadow">
+                            <div class="flex justify-between items-center mb-4">
+                                <h2 class="text-lg font-bold text-gray-800">
+                                    Kondisi Ibu Hamil
+                                </h2>
+                            </div>
+                            <div class="h-64">
+                                <canvas id="ibuHamilChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Upcoming Schedule -->
+                    <div class="bg-white rounded-xl p-4 md:p-6 card-shadow">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-lg font-bold text-gray-800">
+                                Jadwal Mendatang
+                            </h2>
+                            <a
+                                href="#"
+                                class="text-sm text-posyandu hover:underline"
+                                >Lihat Semua</a
+                            >
+                        </div>
+
+                        <div class="space-y-4">
+                            <div
+                                class="flex items-center p-3 border border-gray-200 rounded-lg"
+                            >
+                                <div
+                                    class="bg-posyandu text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center"
+                                >
+                                    <span class="text-xs">SEP</span>
+                                    <span class="font-bold">25</span>
+                                </div>
+                                <div class="ml-4 flex-1">
+                                    <h3 class="font-medium">
+                                        Posyandu Balita Rutin
+                                    </h3>
+                                    <p class="text-sm text-gray-600">
+                                        08:00 - 12:00 • Balai Desa
+                                    </p>
+                                </div>
+                                <button
+                                    class="text-posyandu hover:text-posyanduDark text-sm"
+                                >
+                                    Detail
+                                </button>
+                            </div>
+
+                            <div
+                                class="flex items-center p-3 border border-gray-200 rounded-lg"
+                            >
+                                <div
+                                    class="bg-success text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center"
+                                >
+                                    <span class="text-xs">SEP</span>
+                                    <span class="font-bold">27</span>
+                                </div>
+                                <div class="ml-4 flex-1">
+                                    <h3 class="font-medium">Kelas Ibu Hamil</h3>
+                                    <p class="text-sm text-gray-600">
+                                        13:00 - 15:00 • Aula Posyandu
+                                    </p>
+                                </div>
+                                <button
+                                    class="text-posyandu hover:text-posyanduDark text-sm"
+                                >
+                                    Detail
+                                </button>
+                            </div>
+
+                            <div
+                                class="flex items-center p-3 border border-gray-200 rounded-lg"
+                            >
+                                <div
+                                    class="bg-warning text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center"
+                                >
+                                    <span class="text-xs">OKT</span>
+                                    <span class="font-bold">02</span>
+                                </div>
+                                <div class="ml-4 flex-1">
+                                    <h3 class="font-medium">
+                                        Imunisasi Campak
+                                    </h3>
+                                    <p class="text-sm text-gray-600">
+                                        09:00 - 14:00 • Puskesmas
+                                    </p>
+                                </div>
+                                <button
+                                    class="text-posyandu hover:text-posyanduDark text-sm"
+                                >
+                                    Detail
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
         </div>
 
-        <div class="p-4 flex items-center border-b border-posyanduLight">
-          <div
-            class="rounded-full w-12 h-12 bg-posyanduLight flex items-center justify-center"
-          >
-            <span class="font-bold">KA</span>
-          </div>
-          <div class="ml-3">
-            <p class="font-medium">Kader Posyandu</p>
-          </div>
-        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const menuToggle = document.getElementById("menu-toggle");
+                const sidebar = document.querySelector(".sidebar");
+                const overlay = document.getElementById("overlay");
 
-        <nav class="mt-4">
-          <div>
-            <a href="#" class="flex items-center p-3 bg-posyandu text-white">
-              <i class="fas fa-home w-5"></i>
-              <span class="ml-3">Dashboard</span>
-            </a>
+                // Toggle mobile sidebar
+                menuToggle.addEventListener("click", function () {
+                    sidebar.classList.toggle("active");
+                    overlay.classList.toggle("active");
+                });
 
-            <a
-              href="balita.html"
-              class="flex items-center p-3 text-gray-300 hover:bg-posyandu hover:text-white"
-            >
-              <i class="fas fa-baby w-5"></i>
-              <span class="ml-3">Data Peserta</span>
-            </a>
-            <a
-              href="pemeriksaan.html"
-              class="flex items-center p-3 text-gray-300 hover:bg-posyandu hover:text-white"
-            >
-              <i class="fas fa-stethoscope w-5"></i>
-              <span class="ml-3">Pemeriksaan</span>
-            </a>
-          </div>
-        </nav>
+                overlay.addEventListener("click", function () {
+                    sidebar.classList.remove("active");
+                    overlay.classList.remove("active");
+                });
 
-        <div class="absolute bottom-0 w-full p-4 border-t border-posyanduLight">
-          <a
-            href="#"
-            class="flex items-center p-3 text-gray-300 hover:bg-posyandu hover:text-white rounded"
-          >
-            <i class="fas fa-sign-out-alt w-5"></i>
-            <span class="ml-3">Logout</span>
-          </a>
-        </div>
-      </div>
+                // Initialize charts
+                const giziCtx = document
+                    .getElementById("giziChart")
+                    .getContext("2d");
+                const giziChart = new Chart(giziCtx, {
+                    type: "bar",
+                    data: {
+                        labels: [
+                            "Gizi Baik",
+                            // "Gizi Kurang",
+                            "Gizi Buruk",
+                            "Stunting",
+                            // "Obesitas",
+                        ],
+                        datasets: [
+                            {
+                                label: "Jumlah Balita",
+                                data: [80, 12, 8],
+                                backgroundColor: [
+                                    "#10B981",
+                                    "#F59E0B",
+                                    "#EF4444",
+                                ],
+                                borderWidth: 0,
+                            },
+                        ],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                            },
+                        },
+                    },
+                });
 
-      <!-- Main Content -->
-      <div class="ml-0 md:ml-64 flex-1 min-h-screen">
-        <!-- Top Header -->
-        <header
-          class="bg-white shadow-sm p-4 flex justify-between items-center"
-        >
-          <button id="menu-toggle" class="md:hidden text-gray-600">
-            <i class="fas fa-bars text-xl"></i>
-          </button>
-
-          <div class="relative mx-4 flex-1 max-w-xl">
-            <div
-              class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-            >
-              <i class="fas fa-search text-gray-400"></i>
-            </div>
-            <input
-              type="text"
-              class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-posyandu focus:border-posyandu"
-              placeholder="Cari data..."
-            />
-          </div>
-
-          <div class="flex items-center">
-            <!-- Bell -->
-            <!-- <button class="p-2 rounded-full hover:bg-gray-100 relative">
-              <i class="fas fa-bell text-gray-600"></i>
-              <span
-                class="absolute top-0 right-0 bg-danger rounded-full w-3 h-3"
-              ></span> 
-            </button> -->
-
-            <div class="ml-4 relative">
-              <button class="flex items-center focus:outline-none">
-                <div
-                  class="rounded-full w-10 h-10 bg-posyanduLight flex items-center justify-center text-white"
-                >
-                  <span class="font-bold">KA</span>
-                </div>
-                <span class="ml-2 text-gray-700 hidden md:block">Kader</span>
-                <i
-                  class="fas fa-chevron-down ml-1 text-gray-600 text-xs hidden md:block"
-                ></i>
-              </button>
-            </div>
-          </div>
-        </header>
-
-        <!-- Main Content -->
-        <main class="p-4 md:p-6">
-          <div class="mb-6">
-            <h1 class="text-2xl font-bold text-gray-800">Dashboard</h1>
-            <p class="text-gray-600">
-              Ringkasan data dan aktivitas posyandu terbaru
-            </p>
-          </div>
-
-          <!-- Stats Grid -->
-          <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 md:gap-6 mb-6"
-          >
-            <div class="bg-white rounded-xl p-4 card-shadow">
-              <div class="flex items-center">
-                <div class="rounded-lg bg-blue-100 p-3">
-                  <i class="fas fa-baby text-2xl text-posyandu"></i>
-                </div>
-                <div class="ml-4">
-                  <p class="text-gray-500 text-sm">Total Balita</p>
-                  <h3 class="text-2xl font-bold">100</h3>
-                </div>
-              </div>
-            </div>
-
-            <div class="bg-white rounded-xl p-4 card-shadow">
-              <div class="flex items-center">
-                <div class="rounded-lg bg-green-100 p-3">
-                  <i class="fas fa-female text-2xl text-success"></i>
-                </div>
-                <div class="ml-4">
-                  <p class="text-gray-500 text-sm">Ibu Hamil</p>
-                  <h3 class="text-2xl font-bold">28</h3>
-                </div>
-              </div>
-            </div>
-
-            <!-- <div class="bg-white rounded-xl p-4 card-shadow">
-              <div class="flex items-center">
-                <div class="rounded-lg bg-yellow-100 p-3">
-                  <i class="fas fa-weight text-2xl text-warning"></i>
-                </div>
-                <div class="ml-4">
-                  <p class="text-gray-500 text-sm">Gizi Kurang</p>
-                  <h3 class="text-2xl font-bold">8</h3>
-                </div>
-              </div>
-              <div class="mt-2">
-                <p class="text-xs text-danger">
-                  <i class="fas fa-arrow-down"></i> 3 dari bulan lalu
-                </p>
-              </div>
-            </div> -->
-
-            <!-- <div class="bg-white rounded-xl p-4 card-shadow">
-              <div class="flex items-center">
-                <div class="rounded-lg bg-purple-100 p-3">
-                  <i
-                    class="fas fa-calendar-check text-2xl text-posyanduDark"
-                  ></i>
-                </div>
-                <div class="ml-4">
-                  <p class="text-gray-500 text-sm">Kegiatan Bulan Ini</p>
-                  <h3 class="text-2xl font-bold">5</h3>
-                </div>
-              </div>
-              <div class="mt-2">
-                <p class="text-xs text-gray-500">2 pemeriksaan, 3 penyuluhan</p>
-              </div>
-            </div> -->
-          </div>
-
-          <!-- Charts Section -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-            <!-- Status Gizi Balita Chart -->
-            <div class="bg-white rounded-xl p-4 md:p-6 card-shadow">
-              <div class="flex justify-between items-center mb-4">
-                <h2 class="text-lg font-bold text-gray-800">
-                  Status Gizi Balita
-                </h2>
-              </div>
-              <div class="h-64">
-                <canvas id="giziChart"></canvas>
-              </div>
-            </div>
-
-            <!-- Kondisi Ibu Hamil Chart -->
-            <div class="bg-white rounded-xl p-4 md:p-6 card-shadow">
-              <div class="flex justify-between items-center mb-4">
-                <h2 class="text-lg font-bold text-gray-800">
-                  Kondisi Ibu Hamil
-                </h2>
-              </div>
-              <div class="h-64">
-                <canvas id="ibuHamilChart"></canvas>
-              </div>
-            </div>
-          </div>
-          <!-- Upcoming Schedule -->
-          <div class="bg-white rounded-xl p-4 md:p-6 card-shadow">
-            <div class="flex justify-between items-center mb-4">
-              <h2 class="text-lg font-bold text-gray-800">Jadwal Mendatang</h2>
-              <a href="#" class="text-sm text-posyandu hover:underline"
-                >Lihat Semua</a
-              >
-            </div>
-
-            <div class="space-y-4">
-              <div
-                class="flex items-center p-3 border border-gray-200 rounded-lg"
-              >
-                <div
-                  class="bg-posyandu text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center"
-                >
-                  <span class="text-xs">SEP</span>
-                  <span class="font-bold">25</span>
-                </div>
-                <div class="ml-4 flex-1">
-                  <h3 class="font-medium">Posyandu Balita Rutin</h3>
-                  <p class="text-sm text-gray-600">
-                    08:00 - 12:00 • Balai Desa
-                  </p>
-                </div>
-                <button class="text-posyandu hover:text-posyanduDark text-sm">
-                  Detail
-                </button>
-              </div>
-
-              <div
-                class="flex items-center p-3 border border-gray-200 rounded-lg"
-              >
-                <div
-                  class="bg-success text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center"
-                >
-                  <span class="text-xs">SEP</span>
-                  <span class="font-bold">27</span>
-                </div>
-                <div class="ml-4 flex-1">
-                  <h3 class="font-medium">Kelas Ibu Hamil</h3>
-                  <p class="text-sm text-gray-600">
-                    13:00 - 15:00 • Aula Posyandu
-                  </p>
-                </div>
-                <button class="text-posyandu hover:text-posyanduDark text-sm">
-                  Detail
-                </button>
-              </div>
-
-              <div
-                class="flex items-center p-3 border border-gray-200 rounded-lg"
-              >
-                <div
-                  class="bg-warning text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center"
-                >
-                  <span class="text-xs">OKT</span>
-                  <span class="font-bold">02</span>
-                </div>
-                <div class="ml-4 flex-1">
-                  <h3 class="font-medium">Imunisasi Campak</h3>
-                  <p class="text-sm text-gray-600">09:00 - 14:00 • Puskesmas</p>
-                </div>
-                <button class="text-posyandu hover:text-posyanduDark text-sm">
-                  Detail
-                </button>
-              </div>
-            </div>
-          </div>
-        </main>
-      </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const menuToggle = document.getElementById("menu-toggle");
-        const sidebar = document.querySelector(".sidebar");
-        const overlay = document.getElementById("overlay");
-
-        // Toggle mobile sidebar
-        menuToggle.addEventListener("click", function () {
-          sidebar.classList.toggle("active");
-          overlay.classList.toggle("active");
-        });
-
-        overlay.addEventListener("click", function () {
-          sidebar.classList.remove("active");
-          overlay.classList.remove("active");
-        });
-
-        // Initialize charts
-        const giziCtx = document.getElementById("giziChart").getContext("2d");
-        const giziChart = new Chart(giziCtx, {
-          type: "bar",
-          data: {
-            labels: [
-              "Gizi Baik",
-              // "Gizi Kurang",
-              "Gizi Buruk",
-              "Stunting",
-              // "Obesitas",
-            ],
-            datasets: [
-              {
-                label: "Jumlah Balita",
-                data: [80, 12, 8],
-                backgroundColor: ["#10B981", "#F59E0B", "#EF4444"],
-                borderWidth: 0,
-              },
-            ],
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-              y: {
-                beginAtZero: true,
-              },
-            },
-          },
-        });
-
-        const ibuHamilCtx = document
-          .getElementById("ibuHamilChart")
-          .getContext("2d");
-        const ibuHamilChart = new Chart(ibuHamilCtx, {
-          type: "doughnut",
-          data: {
-            labels: ["Kondisi Baik", "Anemia"],
-            datasets: [
-              {
-                data: [20, 4],
-                backgroundColor: ["#10B981", "#3B82F6"],
-                borderWidth: 0,
-              },
-            ],
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: {
-                position: "right",
-              },
-            },
-          },
-        });
-      });
-    </script>
-  </body>
+                const ibuHamilCtx = document
+                    .getElementById("ibuHamilChart")
+                    .getContext("2d");
+                const ibuHamilChart = new Chart(ibuHamilCtx, {
+                    type: "doughnut",
+                    data: {
+                        labels: ["Kondisi Baik", "Anemia"],
+                        datasets: [
+                            {
+                                data: [20, 4],
+                                backgroundColor: ["#10B981", "#3B82F6"],
+                                borderWidth: 0,
+                            },
+                        ],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: "right",
+                            },
+                        },
+                    },
+                });
+            });
+        </script>
+    </body>
 </html>

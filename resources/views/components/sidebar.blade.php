@@ -21,17 +21,16 @@
     </div>
 
     <nav class="mt-4">
-        <a href="{{ url('/') }}" class="flex items-center p-3 bg-posyanduu text-white rounded">
+        <a href="{{ url('/') }}" class="flex items-center p-3 bg-posyanduu text-white ">
             <i class="fas fa-home w-5"></i>
             <span class="ml-3">Dashboard</span>
         </a>
-        <a href="{{ url('/balita') }}"
-            class="flex items-center p-3 text-gray-300 hover:bg-posyanduu hover:text-white rounded">
+        <a href="{{ url('/balita') }}" class="flex items-center p-3 text-gray-300 hover:bg-posyanduu hover:text-white ">
             <i class="fas fa-baby w-5"></i>
             <span class="ml-3">Data Peserta</span>
         </a>
         <a href="{{ url('/pemeriksaan') }}"
-            class="flex items-center p-3 text-gray-300 hover:bg-posyanduu hover:text-white rounded">
+            class="flex items-center p-3 text-gray-300 hover:bg-posyanduu hover:text-white ">
             <i class="fas fa-stethoscope w-5"></i>
             <span class="ml-3">Pemeriksaan</span>
         </a>
@@ -58,8 +57,6 @@
     <button id="menu-btn" class="md:hidden p-2 text-gray-600 ">
         <i class="fa-solid fa-bars fa-xl"></i>
     </button>
-
-    <!-- Profil user / admin -->
     <div class="flex items-center space-x-2 ml-auto border-b border-white p-2">
         <div class="rounded-full w-10 h-10 bg-posyanduu flex items-center justify-center">
             <span class="font-bold text-white">

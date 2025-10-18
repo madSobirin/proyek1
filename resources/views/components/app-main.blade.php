@@ -15,10 +15,10 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="bg-bgAll">
+<body class="bg-gray-100">
     <x-sidebar />
     <main class="pt-16 md:pl-64">
-        <div class="p-2 pt-0">
+        <div class="p-4">
             {{ $slot }}
         </div>
     </main>
