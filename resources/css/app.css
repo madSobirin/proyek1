@@ -17,11 +17,14 @@
     --color-lamp-button: #9aa65d;
     --color-lamp-button-hover: #7f8c44;
     --color-form: #eae8c7;
-    --color-posyanduu: #6d8b46;
+    --color-posyanduu: #70b2b2;
+    /* --color-posyanduu: #6d8b46; */
     --color-posyanduLight: #818cf8;
-    --color-posyanduDark: #889d5b;
+    --color-posyanduDark: #008080;
+    /* --color-posyanduDark: #889d5b; */
     --color-success: #10b981;
     --color-warning: #f59e0b;
     --color-danger: #ef4444;
     --color-bgAll: #dddddd;
+    --color-navc: #9ecfd4;
 }
