@@ -3,6 +3,8 @@ import "./bootstrap";
 import Chart from "chart.js/auto";
 window.Chart = Chart;
 import "./chart.js";
+import "./tab.js";
+import "./sidebar.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.getElementById("login-form");

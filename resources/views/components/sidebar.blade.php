@@ -21,20 +21,28 @@
     </div>
 
     <nav class="mt-4">
-        <a href="{{ url('/') }}" class="flex items-center p-3 bg-posyanduu text-white ">
+        <a href="{{ url('/kader/dashboard') }}"
+            class="flex items-center p-3 border-l-4 
+              {{ request()->is('kader/dashboard') ? 'border-white bg-posyanduu text-white' : 'border-transparent text-gray-300 hover:bg-posyanduu hover:text-white' }}">
             <i class="fas fa-home w-5"></i>
             <span class="ml-3">Dashboard</span>
         </a>
-        <a href="{{ url('/balita') }}" class="flex items-center p-3 text-gray-300 hover:bg-posyanduu hover:text-white ">
+
+        <a href="{{ url('/data') }}"
+            class="flex items-center p-3 border-l-4 
+              {{ request()->is('data') ? 'border-white bg-posyanduu text-white' : 'border-transparent text-gray-300 hover:bg-posyanduu hover:text-white' }}">
             <i class="fas fa-baby w-5"></i>
             <span class="ml-3">Data Peserta</span>
         </a>
+
         <a href="{{ url('/pemeriksaan') }}"
-            class="flex items-center p-3 text-gray-300 hover:bg-posyanduu hover:text-white ">
+            class="flex items-center p-3 border-l-4 
+              {{ request()->is('pemeriksaan') ? 'border-white bg-posyanduu text-white' : 'border-transparent text-gray-300 hover:bg-posyanduu hover:text-white' }}">
             <i class="fas fa-stethoscope w-5"></i>
             <span class="ml-3">Pemeriksaan</span>
         </a>
     </nav>
+
 
     <div class="absolute bottom-0 w-full p-4 border-t border-white">
         <form method="POST" action="{{ route('logout') }}">
