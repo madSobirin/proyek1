@@ -57,16 +57,17 @@
     <button id="menu-btn" class="md:hidden p-2 text-gray-600 ">
         <i class="fa-solid fa-bars fa-xl"></i>
     </button>
-    <div class="flex items-center space-x-2 ml-auto border-b border-white p-2">
+    <a href="#"
+        class="flex items-center space-x-2 ml-auto border-b border-white p-2 hover:bg-gray-50 transition rounded-lg">
+        <div class="flex items-center space-x-1">
+            <h1 class="text-md font-bold text-gray-600">
+                {{ Auth::user()->role }}
+            </h1>
+        </div>
         <div class="rounded-full w-10 h-10 bg-posyanduu flex items-center justify-center">
             <span class="font-bold text-white">
                 {{ collect(explode(' ', Auth::user()->name))->map(fn($n) => strtoupper($n[0]))->join('') }}
             </span>
         </div>
-
-        <div class="flex items-center space-x-1">
-            <h1 class="text-md font-bold text-gray-600">{{ Auth::user()->role }}</h1>
-            <i class="fas fa-chevron-down text-gray-600 text-xs md:block"></i>
-        </div>
-    </div>
+    </a>
 </header>

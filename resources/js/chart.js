@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     {
                         label: "Jumlah Balita",
                         data: [80, 12, 8],
-                        // backgroundColor: ["#10B981", "#10b981", "#10b981"],
                         backgroundColor: ["#10B981", "#F59E0B", "#EF4444"],
                     },
                 ],
