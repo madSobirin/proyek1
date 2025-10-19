@@ -41,7 +41,7 @@
                 <div class="overflow-x-auto">
                     <table class="w-full">
                         <thead>
-                            <tr class="text-left border-b text-gray-600 text-sm">
+                            <tr class="text-left border-b text-gray-800 text-sm">
                                 <th class="pb-3 font-medium">
                                     NIK
                                 </th>
@@ -65,17 +65,36 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y text-gray-800">
+                        <tbody class="divide-y text-gray-700">
                             @isset($balitas)
                                 @forelse ($balitas as $balita)
                                     <tr>
                                         <td class="py-4">{{ $balita->nik }}</td>
                                         <td class="py-4">{{ $balita->nama_balita }}</td>
-                                        <td class="py-4">{{ $balita->tahun }} tahun {{ $balita->bulan }} bulan</td>
+                                        <td class="py-4">{{ $balita->usia_tahun }} tahun {{ $balita->usia_bulan }} bulan
+                                        </td>
                                         <td class="py-4">{{ $balita->jenis_kelamin }}</td>
                                         <td class="py-4">{{ $balita->alamat }}</td>
                                         <td class="py-4">{{ $balita->nama_orang_tua }}</td>
-                                        <td class="py-4 text-center">—</td>
+                                        <td class="py-4 text-center">
+                                            <div class="flex space-x-2">
+                                                {{-- <a href="{{ route('ibu.edit', $ibu->id) }}" --}}
+                                                <a href="#" class="text-warning hover:text-yellow-600">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+
+                                                <form action="{{ route('balita.destroy', $balita->id) }}" method="POST"
+                                                    onsubmit="return confirm('Yakin ingin menghapus data ini?')"
+                                                    class="inline-block">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="text-danger hover:text-red-600 cursor-pointer">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>
@@ -182,7 +201,7 @@
                                                 <i class="fas fa-edit"></i>
                                             </a>
 
-                                            <form action="{{ route('ibu.destroy', $ibu->id) }}" method="POST"
+                                            <form action="{{ route('balita.destroy', $ibu->id) }}" method="POST"
                                                 onsubmit="return confirm('Yakin ingin menghapus data ini?')"
                                                 class="inline-block">
                                                 @csrf

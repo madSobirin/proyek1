@@ -16,7 +16,7 @@
 
         <!-- Card Form -->
         <div class="bg-white rounded-xl shadow-md p-6 md:p-8">
-            <form action="#" method="POST" class="space-y-8">
+            <form action="{{ route('balita.store') }}" method="POST" class="space-y-8">
                 @csrf
 
                 <!-- Pilih Kategori -->
@@ -40,10 +40,10 @@
                         <div class="space-y-6">
                             <!-- NIK -->
                             <div>
-                                <label for="nik_balita" class="block text-sm font-medium text-gray-700 mb-2">
+                                <label for="nik" class="block text-sm font-medium text-gray-700 mb-2">
                                     NIK Balita <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text" id="nik_balita" name="nik_balita"
+                                <input type="text" id="nik" name="nik"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-button focus:border-transparent"
                                     placeholder="Masukkan NIK balita">
                             </div>
@@ -66,14 +66,14 @@
                                 <div class="grid grid-cols-2 gap-4">
                                     <div>
                                         <label for="tahun" class="block text-xs text-gray-500 mb-1">Tahun</label>
-                                        <input type="number" id="tahun" name="tahun" min="0"
+                                        <input type="number" id="usia_tahun" name="usia_tahun" min="0"
                                             max="5"
                                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-button focus:border-transparent"
                                             placeholder="0">
                                     </div>
                                     <div>
-                                        <label for="bulan" class="block text-xs text-gray-500 mb-1">Bulan</label>
-                                        <input type="number" id="bulan" name="bulan" min="0"
+                                        <label for="usia_bulan" class="block text-xs text-gray-500 mb-1">Bulan</label>
+                                        <input type="number" id="usia_bulan" name="usia_bulan" min="0"
                                             max="11"
                                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-button focus:border-transparent"
                                             placeholder="0">
@@ -99,10 +99,10 @@
 
                             <!-- Alamat -->
                             <div>
-                                <label for="alamat_balita" class="block text-sm font-medium text-gray-700 mb-2">
+                                <label for="alamat" class="block text-sm font-medium text-gray-700 mb-2">
                                     Alamat <span class="text-red-500">*</span>
                                 </label>
-                                <textarea id="alamat_balita" name="alamat_balita" rows="3"
+                                <textarea id="alamat" name="alamat" rows="3"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-button focus:border-transparent"
                                     placeholder="Masukkan alamat lengkap"></textarea>
                             </div>
