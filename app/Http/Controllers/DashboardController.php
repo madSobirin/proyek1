@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
+use App\Models\Balita;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -13,7 +14,8 @@ class DashboardController extends Controller
     {
         return view('kader.dashboard', [
             'title' => 'Dashboard Kader',
-            'user' => Auth::user()
+            'user' => Auth::user(),
+            'totalBalita' => Balita::count(),
         ]);
     }
 

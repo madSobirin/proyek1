@@ -12,7 +12,7 @@
                         <p class="text-gray-500 text-sm">
                             Total Balita
                         </p>
-                        <h3 class="text-2xl font-bold">100</h3>
+                        <h3 class="text-2xl font-bold">{{ $totalBalita }}</h3>
                     </div>
                 </div>
             </div>
