@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class PesertaController extends Controller
 {
-    public function create()
+    public function index()
     {
-        return view('kader.tambah-data'); // pastikan ini path Blade formmu
+        return view('kader.tambah-data');
     }
     public function store(Request $request)
     {
