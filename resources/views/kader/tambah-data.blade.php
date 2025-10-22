@@ -127,20 +127,20 @@
                         <div class="space-y-6">
                             <!-- NIK -->
                             <div>
-                                <label for="nik_ibu" class="block text-sm font-medium text-gray-700 mb-2">
+                                <label for="nik_ibu_hamil" class="block text-sm font-medium text-gray-700 mb-2">
                                     NIK Ibu Hamil <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text" id="nik_ibu" name="nik_ibu"
+                                <input type="text" id="nik_ibu_hamil" name="nik_ibu_hamil"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-button focus:border-transparent"
                                     placeholder="Masukkan NIK ibu hamil">
                             </div>
 
                             <!-- Nama Ibu Hamil -->
                             <div>
-                                <label for="nama_ibu" class="block text-sm font-medium text-gray-700 mb-2">
+                                <label for="nama_ibu_hamil" class="block text-sm font-medium text-gray-700 mb-2">
                                     Nama Ibu Hamil <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text" id="nama_ibu" name="nama_ibu"
+                                <input type="text" id="nama_ibu_hamil" name="nama_ibu_hamil"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-button focus:border-transparent"
                                     placeholder="Masukkan nama ibu hamil">
                             </div>
@@ -170,10 +170,10 @@
 
                             <!-- Alamat -->
                             <div>
-                                <label for="alamat_ibu" class="block text-sm font-medium text-gray-700 mb-2">
+                                <label for="alamat_ibu_hamil" class="block text-sm font-medium text-gray-700 mb-2">
                                     Alamat <span class="text-red-500">*</span>
                                 </label>
-                                <textarea id="alamat_ibu" name="alamat_ibu" rows="3"
+                                <textarea id="alamat_ibu_hamil" name="alamat_ibu_hamil" rows="3"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-button focus:border-transparent"
                                     placeholder="Masukkan alamat lengkap"></textarea>
                             </div>
