@@ -31,7 +31,7 @@ Route::middleware(['auth', 'role:pengguna'])->prefix('pengguna')->group(function
 Route::get('/data', [ViewData::class, 'index'])->name('view.data');
 
 // form input data
-Route::get('/data/tambah', [PesertaController::class, 'create'])->name('peserta.index');
+Route::get('/data/tambah', [PesertaController::class, 'create'])->name('peserta.create');
 Route::post('/data/store', [PesertaController::class, 'store'])->name('peserta.store');
 Route::delete('/peserta/{kategori}/{id}', [PesertaController::class, 'destroy'])->name('peserta.destroy');
 
