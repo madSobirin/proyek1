@@ -26,7 +26,7 @@
                         <p class="text-gray-500 text-sm">
                             Ibu Hamil
                         </p>
-                        <h3 class="text-2xl font-bold">28</h3>
+                        <h3 class="text-2xl font-bold">{{ $totalIbuHamil }}</h3>
                     </div>
                 </div>
             </div>

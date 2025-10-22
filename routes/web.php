@@ -4,6 +4,8 @@ use App\Http\Controllers\ViewData;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BalitaController;
+use App\Http\Controllers\PesertaController;
+use App\Http\Controllers\IbuHamilController;
 use App\Http\Controllers\DashboardController;
 
 // register view
@@ -25,15 +27,17 @@ Route::middleware(['auth', 'role:kader'])->prefix('kader')->group(function () {
 Route::middleware(['auth', 'role:pengguna'])->prefix('pengguna')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'pengguna'])->name('pengguna.dashboard');
 });
-
-// Data Peserta routes
+// Menampilkan Data Peserta yang Terdaftar ya
 Route::get('/data', [ViewData::class, 'index'])->name('view.data');
 
-// menampilkan View Tambah data
-Route::get('/data/tambah', [BalitaController::class, 'index'])->name('balita.index');
+// form input data
+Route::get('/data/tambah', [PesertaController::class, 'create'])->name('peserta.create');
+Route::post('/data/store', [PesertaController::class, 'store'])->name('peserta.store');
+Route::delete('/peserta/{kategori}/{id}', [PesertaController::class, 'destroy'])->name('peserta.destroy');
 
-// Mengirim ke database tambah data
-Route::post('/data/tambah', [BalitaController::class, 'store'])->name('balita.store');
 
-// Menghapus data Balita berdasrkan id yang di pilih ya
-Route::delete('/balita/{id}', [BalitaController::class, 'destroy'])->name('balita.destroy');
+
+
+
+
+

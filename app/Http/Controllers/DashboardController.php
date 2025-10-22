@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Balita;
 
+use App\Models\IbuHamil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,6 +17,7 @@ class DashboardController extends Controller
             'title' => 'Dashboard Kader',
             'user' => Auth::user(),
             'totalBalita' => Balita::count(),
+            'totalIbuHamil' => IbuHamil::count(),
         ]);
     }
 

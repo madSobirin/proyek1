@@ -10,7 +10,7 @@
                 </p>
             </div>
             <div class="flex space-x-2">
-                <a href="{{ url('data/tambah') }}"
+                <a href="{{ route('peserta.create') }}"
                     class="bg-button hover:bg-buttonhover transition-colors duration-200 text-white px-4 py-2 rounded-lg flex items-center">
                     <i class="fas fa-plus mr-2"></i> Tambah Data
                 </a>
@@ -83,7 +83,9 @@
                                                     <i class="fas fa-edit"></i>
                                                 </a>
 
-                                                <form action="{{ route('balita.destroy', $balita->id) }}" method="POST"
+                                                <form
+                                                    action="{{ route('peserta.destroy', ['kategori' => 'balita', 'id' => $balita->id]) }}"
+                                                    method="POST"
                                                     onsubmit="return confirm('Yakin ingin menghapus data ini?')"
                                                     class="inline-block">
                                                     @csrf
@@ -170,58 +172,45 @@
                                 </th>
                             </tr>
                         </thead>
-                        @php
-                            $ibus = $ibus ?? [];
-                        @endphp
+                        <tbody class="divide-y text-gray-700">
+                            @if (count($ibu_hamils) > 0)
+                                @foreach ($ibu_hamils as $ibu)
+                                    <tr>
+                                        <td class="py-4">{{ $ibu->nik_ibu_hamil }}</td>
+                                        <td class="py-4">{{ $ibu->nama_ibu_hamil }}</td>
+                                        <td class="py-4">{{ $ibu->nama_suami }}</td>
+                                        <td class="py-4">{{ $ibu->umur }} tahun</td>
+                                        <td class="py-4">{{ $ibu->alamat_ibu_hamil }}</td>
+                                        <td class="py-4 text-center">
+                                            <div class="flex space-x-2">
+                                                <a href="#" class="text-warning hover:text-yellow-600">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
 
-                        <tbody class="divide-y text-gray-800">
-                            @forelse ($ibus as $ibu)
-                                <tr>
-                                    <td class="py-4">
-                                        <div class="flex items-center">
-                                            <div
-                                                class="rounded-full w-10 h-10 bg-purple-100 flex items-center justify-center mr-3">
-                                                <i class="fas fa-female text-purple-500"></i>
+                                                <form
+                                                    action="{{ route('peserta.destroy', ['kategori' => 'ibu_hamil', 'id' => $ibu->id]) }}"
+                                                    method="POST"
+                                                    onsubmit="return confirm('Yakin ingin menghapus data ini?')"
+                                                    class="inline-block">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="text-danger hover:text-red-600 cursor-pointer">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
                                             </div>
-                                            <div>
-                                                <p>{{ $ibu->nik }}</p>
-                                            </div>
-                                        </div>
-                                    </td>
-
-                                    <td class="py-4">{{ $ibu->nama_ibu }}</td>
-                                    <td class="py-4">{{ $ibu->nama_suami }}</td>
-                                    <td class="py-4">{{ $ibu->umur }}</td>
-                                    <td class="py-4">{{ $ibu->alamat }}</td>
-
-                                    <td class="py-4">
-                                        <div class="flex space-x-2">
-                                            <a href="{{ route('ibu.edit', $ibu->id) }}"
-                                                class="text-warning hover:text-yellow-600">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-
-                                            <form action="{{ route('balita.destroy', $ibu->id) }}" method="POST"
-                                                onsubmit="return confirm('Yakin ingin menghapus data ini?')"
-                                                class="inline-block">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="text-danger hover:text-red-600">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @empty
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
                                 <tr>
                                     <td colspan="6" class="py-6 text-center text-gray-500">
                                         <i class="fas fa-info-circle mr-2"></i> Tidak ada data ibu hamil yang tersedia
                                     </td>
                                 </tr>
-                            @endforelse
+                            @endif
                         </tbody>
-
                     </table>
                 </div>
 

@@ -9,11 +9,11 @@ return new class extends Migration {
     {
         Schema::create('ibu_hamils', function (Blueprint $table) {
             $table->id();
-            $table->string('nik', 20)->unique();
+            $table->string('nik_ibu_hamil', 20)->unique();
             $table->string('nama_ibu_hamil');
             $table->string('nama_suami');
             $table->integer('umur');
-            $table->string('alamat');
+            $table->string('alamat_ibu_hamil');
             $table->timestamps();
         });
     }

@@ -16,9 +16,9 @@
 
         <!-- Card Form -->
         <div class="bg-white rounded-xl shadow-md p-6 md:p-8">
-            <form action="{{ route('balita.store') }}" method="POST" class="space-y-8">
+            <form action="{{ route('peserta.store') }}" method="POST" class="space-y-8">
                 @csrf
-
+                <input type="hidden" id="kategori_hidden" name="kategori">
                 <!-- Pilih Kategori -->
                 <div>
                     <label for="kategori" class="block text-sm font-medium text-gray-700 mb-2">
