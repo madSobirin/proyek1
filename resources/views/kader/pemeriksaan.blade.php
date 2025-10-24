@@ -109,9 +109,59 @@
 
                 <!-- Jadwal -->
                 <div x-show="activeTab === 'jadwal'" x-transition>
-                    <div class="mt-4 p-6 border-2 border-dashed border-gray-300 rounded-lg text-center text-gray-500">
-                        Belum ada jadwal posyandu yang ditambahkan.
+                    <div class="flex justify-between items-center">
+                        <h1 class="text-xl font-bold text-gray-900">Kegiatan Mendatang</h1>
+                        <a href="#" class="bg-button text-white px-4 py-2 rounded-md hover:bg-buttonhover"><i
+                                class="fa-solid fa-calendar-plus mr-2"></i>Tambah
+                            Jadwal</a>
                     </div>
+
+                    <div class="flex items-center p-4 border border-gray-200 rounded-lg mt-4">
+                        <div
+                            class="bg-posyanduu text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center">
+                            <span class="font-bold">25</span>
+                        </div>
+                        <div class="ml-4 flex-1">
+                            <h3 class="font-medium">
+                                Posyandu Balita Rutin
+                            </h3>
+                            <p class="text-sm text-gray-600">
+                                08:00 - 10:00 • Balai Desa
+                            </p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="text-posyanduu hover:text-posyanduDark">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="text-danger hover:text-red-600">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-4 border border-gray-200 rounded-lg mt-4">
+                        <div class="bg-tggl text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center">
+                            <span class="font-bold">27</span>
+                        </div>
+                        <div class="ml-4 flex-1">
+                            <h3 class="font-medium">
+                                Kelas Ibu Hamil
+                            </h3>
+                            <p class="text-sm text-gray-600">
+                                08:00 - 10:00 • Aula Posyandu
+                            </p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="text-posyanduu hover:text-posyanduDark">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="text-danger hover:text-red-600">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    {{-- <div class="mt-4 p-6 border-2 border-dashed border-gray-300 rounded-lg text-center text-gray-500">
+                        Belum ada jadwal posyandu yang ditambahkan.
+                    </div> --}}
                 </div>
             </div>
         </div>

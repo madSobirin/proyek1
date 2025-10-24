@@ -4,9 +4,9 @@
     <div class="p-4 border-b border-white">
         <div class="flex items-center space-x-3">
             <img src="{{ asset('img/elsimil.png') }}" alt="logo Sipos" class="w-13 h-13 object-contain">
-            <h1 class="text-xl font-bold text-white">SIPOS</h1>
+            <h1 class="text-xl font-bold text-white tracking-wider">SIPOS</h1>
         </div>
-        <p class="text-white text-sm">Sistem Informasi Posyandu</p>
+        <p class="text-white text-sm tracking-wide">Sistem Informasi Posyandu</p>
     </div>
 
     <div class="p-4 flex items-center border-b border-white">
@@ -40,6 +40,13 @@
               {{ request()->is('pemeriksaan') ? 'border-white bg-posyanduu text-white' : 'border-transparent text-gray-300 hover:bg-posyanduu hover:text-white' }}">
             <i class="fas fa-stethoscope w-5"></i>
             <span class="ml-3">Pemeriksaan</span>
+        </a>
+
+        <a href="{{ url('/laporan') }}"
+            class="flex items-center p-3 border-l-4 
+              {{ request()->is('laporan') ? 'border-white bg-posyanduu text-white' : 'border-transparent text-gray-300 hover:bg-posyanduu hover:text-white' }}">
+            <i class="fas fa-file-alt w-5"></i>
+            <span class="ml-3">Ekspor Laporan</span>
         </a>
     </nav>
 
