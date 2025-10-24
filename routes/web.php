@@ -35,6 +35,10 @@ Route::get('/data/tambah', [PesertaController::class, 'create'])->name('peserta.
 Route::post('/data/store', [PesertaController::class, 'store'])->name('peserta.store');
 Route::delete('/peserta/{kategori}/{id}', [PesertaController::class, 'destroy'])->name('peserta.destroy');
 
+// pemeriksaan
+Route::get('/pemeriksaan', function () {
+    return view('kader.pemeriksaan');
+});
 
 
 

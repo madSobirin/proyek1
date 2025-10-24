@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Pemeriksaan & Jadwal - Sistem Posyandu Modern</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: "#4F46E5",
+                            secondary: "#10B981",
+                            posyandu: "#4F46E5",
+                            posyanduLight: "#818CF8",
+                            posyanduDark: "#3730A3",
+                            danger: "#EF4444",
+                            warning: "#F59E0B",
+                            success: "#10B981",
+                        },
+                    },
+                },
+            };
+        </script>
+        <style>
+            body {
+                font-family: "Poppins", sans-serif;
+            }
+            .sidebar {
+                transition: all 0.3s ease;
+            }
+            @media (max-width: 768px) {
+                .sidebar {
+                    transform: translateX(-100%);
+                    position: fixed;
+                    z-index: 50;
+                    height: 100vh;
+                }
+                .sidebar.active {
+                    transform: translateX(0);
+                }
+                .overlay {
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    z-index: 40;
+                }
+                .overlay.active {
+                    display: block;
+                }
+            }
+            .card-shadow {
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            }
+            .tab-button {
+                transition: all 0.3s ease;
+            }
+            [data-content] {
+                display: none;
+            }
+            [data-content].active {
+                display: block;
+            }
+        </style>
+    </head>
+    <body class="bg-gray-100">
+        <!-- Overlay for mobile -->
+        <div class="overlay" id="overlay"></div>
+
+        <div class="flex">
+            <!-- Sidebar/Navbar -->
+            <div class="sidebar w-64 bg-posyanduDark text-white h-screen fixed">
+                <div class="p-4 border-b border-posyanduLight">
+                    <h1 class="text-xl font-bold">SIPOS</h1>
+                    <p class="text-posyanduLight text-sm">
+                        Sistem Informasi Posyandu
+                    </p>
+                </div>
+
+                <div
+                    class="p-4 flex items-center border-b border-posyanduLight"
+                >
+                    <div
+                        class="rounded-full w-12 h-12 bg-posyanduLight flex items-center justify-center"
+                    >
+                        <span class="font-bold">AD</span>
+                    </div>
+                    <div class="ml-3">
+                        <p class="font-medium">Admin Posyandu</p>
+                        <p class="text-xs text-posyanduLight">Kader Wilayah</p>
+                    </div>
+                </div>
+
+                <nav class="mt-4">
+                    <div>
+                        <a
+                            href="dashboard.html"
+                            class="flex items-center p-3 text-gray-300 hover:bg-posyandu hover:text-white"
+                        >
+                            <i class="fas fa-home w-5"></i>
+                            <span class="ml-3">Dashboard</span>
+                        </a>
+
+                        <a
+                            href="balita.html"
+                            class="flex items-center p-3 text-gray-300 hover:bg-posyandu hover:text-white"
+                        >
+                            <i class="fas fa-baby w-5"></i>
+                            <span class="ml-3">Data Peserta</span>
+                        </a>
+
+                        <a
+                            href="pemeriksaan.html"
+                            class="flex items-center p-3 bg-posyandu text-white"
+                        >
+                            <i class="fas fa-stethoscope w-5"></i>
+                            <span class="ml-3">Pemeriksaan</span>
+                        </a>
+                    </div>
+                </nav>
+
+                <div
+                    class="absolute bottom-0 w-full p-4 border-t border-posyanduLight"
+                >
+                    <a
+                        href="#"
+                        class="flex items-center p-3 text-gray-300 hover:bg-posyandu hover:text-white rounded"
+                    >
+                        <i class="fas fa-sign-out-alt w-5"></i>
+                        <span class="ml-3">Logout</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="ml-0 md:ml-64 flex-1 min-h-screen">
+                <!-- Top Header -->
+                <header
+                    class="bg-white shadow-sm p-4 flex justify-between items-center"
+                >
+                    <button id="menu-toggle" class="md:hidden text-gray-600">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+
+                    <div class="relative mx-4 flex-1 max-w-xl">
+                        <div
+                            class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                        >
+                            <i class="fas fa-search text-gray-400"></i>
+                        </div>
+                        <input
+                            type="text"
+                            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-posyandu focus:border-posyandu"
+                            placeholder="Cari data..."
+                        />
+                    </div>
+
+                    <div class="flex items-center">
+                        <button
+                            class="p-2 rounded-full hover:bg-gray-100 relative"
+                        >
+                            <i class="fas fa-bell text-gray-600"></i>
+                            <span
+                                class="absolute top-0 right-0 bg-danger rounded-full w-3 h-3"
+                            ></span>
+                        </button>
+
+                        <div class="ml-4 relative">
+                            <button
+                                class="flex items-center focus:outline-none"
+                            >
+                                <div
+                                    class="rounded-full w-10 h-10 bg-posyanduLight flex items-center justify-center text-white"
+                                >
+                                    <span class="font-bold">AD</span>
+                                </div>
+                                <span class="ml-2 text-gray-700 hidden md:block"
+                                    >Admin</span
+                                >
+                                <i
+                                    class="fas fa-chevron-down ml-1 text-gray-600 text-xs hidden md:block"
+                                ></i>
+                            </button>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Main Content -->
+                <main class="p-4 md:p-6">
+                    <div class="mb-6 flex justify-between items-center">
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-800">
+                                Pemeriksaan & Jadwal Posyandu
+                            </h1>
+                            <p class="text-gray-600">
+                                Kelola pemeriksaan dan jadwal kegiatan posyandu
+                            </p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button
+                                class="bg-posyandu hover:bg-posyanduDark text-white px-4 py-2 rounded-lg flex items-center"
+                            >
+                                <i class="fas fa-plus mr-2"></i> Pemeriksaan
+                                Baru
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tabs -->
+                    <div class="bg-white rounded-xl card-shadow mb-6">
+                        <div class="border-b border-gray-200">
+                            <nav class="flex -mb-px">
+                                <button
+                                    id="pemeriksaan-tab"
+                                    class="tab-button py-4 px-6 text-center border-b-2 border-posyandu font-medium text-sm whitespace-nowrap text-posyandu"
+                                >
+                                    Pemeriksaan
+                                </button>
+                                <button
+                                    id="jadwal-tab"
+                                    class="tab-button py-4 px-6 text-center border-b-2 border-transparent font-medium text-sm whitespace-nowrap text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                                >
+                                    Jadwal Posyandu
+                                </button>
+                                <button
+                                    id="laporan-tab"
+                                    class="tab-button py-4 px-6 text-center border-b-2 border-transparent font-medium text-sm whitespace-nowrap text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                                >
+                                    Laporan
+                                </button>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!-- Pemeriksaan Content -->
+                    <div id="pemeriksaan-content" data-content class="active">
+                        <!-- Pemeriksaan Table -->
+                        <div
+                            class="bg-white rounded-xl p-4 md:p-6 card-shadow mb-6"
+                        >
+                            <div class="overflow-x-auto">
+                                <table class="w-full">
+                                    <thead>
+                                        <tr
+                                            class="text-left border-b text-gray-600 text-sm"
+                                        >
+                                            <th class="pb-3 font-medium">
+                                                Tanggal
+                                            </th>
+                                            <th class="pb-3 font-medium">
+                                                Jenis Pemeriksaan
+                                            </th>
+                                            <th class="pb-3 font-medium">
+                                                Nama
+                                            </th>
+                                            <th class="pb-3 font-medium">
+                                                Usia
+                                            </th>
+                                            <th class="pb-3 font-medium">
+                                                Petugas
+                                            </th>
+                                            <th class="pb-3 font-medium">
+                                                Status
+                                            </th>
+                                            <th class="pb-3 font-medium">
+                                                Aksi
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y">
+                                        <tr>
+                                            <td class="py-4">
+                                                20 Sep 2023<br /><span
+                                                    class="text-xs text-gray-500"
+                                                    >08:30</span
+                                                >
+                                            </td>
+                                            <td class="py-4">
+                                                <div class="flex items-center">
+                                                    <div
+                                                        class="rounded-full w-8 h-8 bg-blue-100 flex items-center justify-center mr-2"
+                                                    >
+                                                        <i
+                                                            class="fas fa-baby text-blue-500 text-xs"
+                                                        ></i>
+                                                    </div>
+                                                    Pemeriksaan Balita
+                                                </div>
+                                            </td>
+                                            <td class="py-4">Ahmad Sutisna</td>
+                                            <td class="py-4">2 Tahun</td>
+                                            <td class="py-4">Nurseha, S.K.M</td>
+                                            <td class="py-4">
+                                                <span
+                                                    class="px-2 py-1 bg-success bg-opacity-10 text-success text-xs rounded-full"
+                                                    >Selesai</span
+                                                >
+                                            </td>
+                                            <td class="py-4">
+                                                <div class="flex space-x-2">
+                                                    <button
+                                                        class="text-posyandu hover:text-posyanduDark"
+                                                    >
+                                                        <i
+                                                            class="fas fa-eye"
+                                                        ></i>
+                                                    </button>
+                                                    <button
+                                                        class="text-warning hover:text-yellow-600"
+                                                    >
+                                                        <i
+                                                            class="fas fa-edit"
+                                                        ></i>
+                                                    </button>
+                                                    <button
+                                                        class="text-danger hover:text-red-600"
+                                                    >
+                                                        <i
+                                                            class="fas fa-trash"
+                                                        ></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-4">
+                                                19 Sep 2023<br /><span
+                                                    class="text-xs text-gray-500"
+                                                    >10:15</span
+                                                >
+                                            </td>
+                                            <td class="py-4">
+                                                <div class="flex items-center">
+                                                    <div
+                                                        class="rounded-full w-8 h-8 bg-purple-100 flex items-center justify-center mr-2"
+                                                    >
+                                                        <i
+                                                            class="fas fa-female text-purple-500 text-xs"
+                                                        ></i>
+                                                    </div>
+                                                    Pemeriksaan Ibu Hamil
+                                                </div>
+                                            </td>
+                                            <td class="py-4">Siti Rahayu</td>
+                                            <td class="py-4">24 Minggu</td>
+                                            <td class="py-4">
+                                                Dr. Indah, Sp.OG
+                                            </td>
+                                            <td class="py-4">
+                                                <span
+                                                    class="px-2 py-1 bg-success bg-opacity-10 text-success text-xs rounded-full"
+                                                    >Selesai</span
+                                                >
+                                            </td>
+                                            <td class="py-4">
+                                                <div class="flex space-x-2">
+                                                    <button
+                                                        class="text-posyandu hover:text-posyanduDark"
+                                                    >
+                                                        <i
+                                                            class="fas fa-eye"
+                                                        ></i>
+                                                    </button>
+                                                    <button
+                                                        class="text-warning hover:text-yellow-600"
+                                                    >
+                                                        <i
+                                                            class="fas fa-edit"
+                                                        ></i>
+                                                    </button>
+                                                    <button
+                                                        class="text-danger hover:text-red-600"
+                                                    >
+                                                        <i
+                                                            class="fas fa-trash"
+                                                        ></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-4">
+                                                18 Sep 2023<br /><span
+                                                    class="text-xs text-gray-500"
+                                                    >09:00</span
+                                                >
+                                            </td>
+                                            <td class="py-4">
+                                                <div class="flex items-center">
+                                                    <div
+                                                        class="rounded-full w-8 h-8 bg-green-100 flex items-center justify-center mr-2"
+                                                    >
+                                                        <i
+                                                            class="fas fa-syringe text-green-500 text-xs"
+                                                        ></i>
+                                                    </div>
+                                                    Imunisasi
+                                                </div>
+                                            </td>
+                                            <td class="py-4">Budi Santoso</td>
+                                            <td class="py-4">3 Tahun</td>
+                                            <td class="py-4">Nurseha, S.K.M</td>
+                                            <td class="py-4">
+                                                <span
+                                                    class="px-2 py-1 bg-success bg-opacity-10 text-success text-xs rounded-full"
+                                                    >Selesai</span
+                                                >
+                                            </td>
+                                            <td class="py-4">
+                                                <div class="flex space-x-2">
+                                                    <button
+                                                        class="text-posyandu hover:text-posyanduDark"
+                                                    >
+                                                        <i
+                                                            class="fas fa-eye"
+                                                        ></i>
+                                                    </button>
+                                                    <button
+                                                        class="text-warning hover:text-yellow-600"
+                                                    >
+                                                        <i
+                                                            class="fas fa-edit"
+                                                        ></i>
+                                                    </button>
+                                                    <button
+                                                        class="text-danger hover:text-red-600"
+                                                    >
+                                                        <i
+                                                            class="fas fa-trash"
+                                                        ></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-4">
+                                                25 Sep 2023<br /><span
+                                                    class="text-xs text-gray-500"
+                                                    >13:00</span
+                                                >
+                                            </td>
+                                            <td class="py-4">
+                                                <div class="flex items-center">
+                                                    <div
+                                                        class="rounded-full w-8 h-8 bg-yellow-100 flex items-center justify-center mr-2"
+                                                    >
+                                                        <i
+                                                            class="fas fa-apple-alt text-yellow-500 text-xs"
+                                                        ></i>
+                                                    </div>
+                                                    Konsultasi Gizi
+                                                </div>
+                                            </td>
+                                            <td class="py-4">Dewi Anggraini</td>
+                                            <td class="py-4">2 Tahun</td>
+                                            <td class="py-4">Ahli Gizi</td>
+                                            <td class="py-4">
+                                                <span
+                                                    class="px-2 py-1 bg-warning bg-opacity-10 text-warning text-xs rounded-full"
+                                                    >Terjadwal</span
+                                                >
+                                            </td>
+                                            <td class="py-4">
+                                                <div class="flex space-x-2">
+                                                    <button
+                                                        class="text-posyandu hover:text-posyanduDark"
+                                                    >
+                                                        <i
+                                                            class="fas fa-eye"
+                                                        ></i>
+                                                    </button>
+                                                    <button
+                                                        class="text-warning hover:text-yellow-600"
+                                                    >
+                                                        <i
+                                                            class="fas fa-edit"
+                                                        ></i>
+                                                    </button>
+                                                    <button
+                                                        class="text-danger hover:text-red-600"
+                                                    >
+                                                        <i
+                                                            class="fas fa-trash"
+                                                        ></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Pagination -->
+                            <div
+                                class="mt-6 flex flex-col md:flex-row justify-between items-center"
+                            >
+                                <p class="text-sm text-gray-600 mb-4 md:mb-0">
+                                    Menampilkan 4 dari 56 pemeriksaan
+                                </p>
+                                <div class="flex space-x-2">
+                                    <button
+                                        class="px-3 py-1 rounded border border-gray-300 text-gray-600 hover:bg-gray-100"
+                                    >
+                                        <i class="fas fa-chevron-left"></i>
+                                    </button>
+                                    <button
+                                        class="px-3 py-1 rounded border border-posyandu bg-posyandu text-white"
+                                    >
+                                        1
+                                    </button>
+                                    <button
+                                        class="px-3 py-1 rounded border border-gray-300 text-gray-600 hover:bg-gray-100"
+                                    >
+                                        2
+                                    </button>
+                                    <button
+                                        class="px-3 py-1 rounded border border-gray-300 text-gray-600 hover:bg-gray-100"
+                                    >
+                                        3
+                                    </button>
+                                    <button
+                                        class="px-3 py-1 rounded border border-gray-300 text-gray-600 hover:bg-gray-100"
+                                    >
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-white rounded-xl p-6 card-shadow">
+                                <div class="flex items-center mb-4">
+                                    <div
+                                        class="rounded-lg bg-blue-100 p-3 mr-4"
+                                    >
+                                        <i
+                                            class="fas fa-baby text-2xl text-posyandu"
+                                        ></i>
+                                    </div>
+                                    <h3 class="text-lg font-semibold">
+                                        Pemeriksaan Balita
+                                    </h3>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">
+                                    Input data pemeriksaan balita termasuk
+                                    pengukuran berat badan, tinggi badan, dan
+                                    lingkar kepala.
+                                </p>
+                                <button
+                                    class="w-full bg-posyandu hover:bg-posyanduDark text-white py-2 px-4 rounded-lg"
+                                >
+                                    Buat Pemeriksaan
+                                </button>
+                            </div>
+
+                            <div class="bg-white rounded-xl p-6 card-shadow">
+                                <div class="flex items-center mb-4">
+                                    <div
+                                        class="rounded-lg bg-purple-100 p-3 mr-4"
+                                    >
+                                        <i
+                                            class="fas fa-female text-2xl text-purple-500"
+                                        ></i>
+                                    </div>
+                                    <h3 class="text-lg font-semibold">
+                                        Pemeriksaan Ibu Hamil
+                                    </h3>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">
+                                    Input data pemeriksaan ibu hamil termasuk
+                                    tekanan darah, berat badan, dan perkembangan
+                                    janin.
+                                </p>
+                                <button
+                                    class="w-full bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded-lg"
+                                >
+                                    Buat Pemeriksaan
+                                </button>
+                            </div>
+
+                            <div class="bg-white rounded-xl p-6 card-shadow">
+                                <div class="flex items-center mb-4">
+                                    <div
+                                        class="rounded-lg bg-green-100 p-3 mr-4"
+                                    >
+                                        <i
+                                            class="fas fa-syringe text-2xl text-green-500"
+                                        ></i>
+                                    </div>
+                                    <h3 class="text-lg font-semibold">
+                                        Imunisasi
+                                    </h3>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">
+                                    Catat data imunisasi balita dan jadwal
+                                    imunisasi berikutnya.
+                                </p>
+                                <button
+                                    class="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg"
+                                >
+                                    Input Imunisasi
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Jadwal Posyandu Content -->
+                    <div id="jadwal-content" data-content>
+                        <!-- Upcoming Events -->
+                        <div class="bg-white rounded-xl p-4 md:p-6 card-shadow">
+                            <div class="flex justify-between items-center mb-4">
+                                <h2 class="text-lg font-bold text-gray-800">
+                                    Kegiatan Mendatang
+                                </h2>
+                                <button
+                                    class="bg-posyandu hover:bg-posyanduDark text-white px-4 py-2 rounded-lg flex items-center"
+                                >
+                                    <i class="fas fa-plus mr-2"></i> Tambah
+                                    Jadwal
+                                </button>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div
+                                    class="flex items-center p-4 border border-gray-200 rounded-lg"
+                                >
+                                    <div
+                                        class="bg-posyandu text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center"
+                                    >
+                                        <span class="text-xs">SEP</span>
+                                        <span class="font-bold">25</span>
+                                    </div>
+                                    <div class="ml-4 flex-1">
+                                        <h3 class="font-medium">
+                                            Posyandu Balita Rutin
+                                        </h3>
+                                        <p class="text-sm text-gray-600">
+                                            08:00 - 12:00 • Balai Desa
+                                        </p>
+                                        <div class="mt-1">
+                                            <span
+                                                class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded"
+                                                >Pemeriksaan Balita</span
+                                            >
+                                            <span
+                                                class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded ml-1"
+                                                >Imunisasi</span
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button
+                                            class="text-posyandu hover:text-posyanduDark"
+                                        >
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button
+                                            class="text-danger hover:text-red-600"
+                                        >
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="flex items-center p-4 border border-gray-200 rounded-lg"
+                                >
+                                    <div
+                                        class="bg-success text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center"
+                                    >
+                                        <span class="text-xs">SEP</span>
+                                        <span class="font-bold">27</span>
+                                    </div>
+                                    <div class="ml-4 flex-1">
+                                        <h3 class="font-medium">
+                                            Kelas Ibu Hamil
+                                        </h3>
+                                        <p class="text-sm text-gray-600">
+                                            13:00 - 15:00 • Aula Posyandu
+                                        </p>
+                                        <div class="mt-1">
+                                            <span
+                                                class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded"
+                                                >Pemeriksaan Ibu Hamil</span
+                                            >
+                                            <span
+                                                class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded ml-1"
+                                                >Edukasi</span
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button
+                                            class="text-posyandu hover:text-posyanduDark"
+                                        >
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button
+                                            class="text-danger hover:text-red-600"
+                                        >
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="flex items-center p-4 border border-gray-200 rounded-lg"
+                                >
+                                    <div
+                                        class="bg-warning text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center"
+                                    >
+                                        <span class="text-xs">OKT</span>
+                                        <span class="font-bold">02</span>
+                                    </div>
+                                    <div class="ml-4 flex-1">
+                                        <h3 class="font-medium">
+                                            Imunisasi Campak
+                                        </h3>
+                                        <p class="text-sm text-gray-600">
+                                            09:00 - 14:00 • Puskesmas
+                                        </p>
+                                        <div class="mt-1">
+                                            <span
+                                                class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded"
+                                                >Imunisasi</span
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button
+                                            class="text-posyandu hover:text-posyanduDark"
+                                        >
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button
+                                            class="text-danger hover:text-red-600"
+                                        >
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Laporan Content -->
+                    <div id="laporan-content" data-content>
+                        <!-- Report Cards -->
+                        <div
+                            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6"
+                        >
+                            <div class="bg-white rounded-xl p-6 card-shadow">
+                                <div class="flex items-center mb-4">
+                                    <div
+                                        class="rounded-lg bg-blue-100 p-3 mr-4"
+                                    >
+                                        <i
+                                            class="fas fa-baby text-2xl text-posyandu"
+                                        ></i>
+                                    </div>
+                                    <h3 class="text-lg font-semibold">
+                                        Laporan Balita
+                                    </h3>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">
+                                    Generate laporan data balita, status gizi,
+                                    dan perkembangan.
+                                </p>
+                                <div class="flex space-x-2">
+                                    <button
+                                        class="flex-1 bg-posyandu hover:bg-posyanduDark text-white py-2 px-3 rounded text-sm"
+                                    >
+                                        <i class="fas fa-file-pdf mr-1"></i> PDF
+                                    </button>
+                                    <button
+                                        class="flex-1 bg-success hover:bg-green-600 text-white py-2 px-3 rounded text-sm"
+                                    >
+                                        <i class="fas fa-file-excel mr-1"></i>
+                                        Excel
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-xl p-6 card-shadow">
+                                <div class="flex items-center mb-4">
+                                    <div
+                                        class="rounded-lg bg-purple-100 p-3 mr-4"
+                                    >
+                                        <i
+                                            class="fas fa-female text-2xl text-purple-500"
+                                        ></i>
+                                    </div>
+                                    <h3 class="text-lg font-semibold">
+                                        Laporan Ibu Hamil
+                                    </h3>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">
+                                    Generate laporan data ibu hamil dan kondisi
+                                    kehamilan.
+                                </p>
+                                <div class="flex space-x-2">
+                                    <button
+                                        class="flex-1 bg-posyandu hover:bg-posyanduDark text-white py-2 px-3 rounded text-sm"
+                                    >
+                                        <i class="fas fa-file-pdf mr-1"></i> PDF
+                                    </button>
+                                    <button
+                                        class="flex-1 bg-success hover:bg-green-600 text-white py-2 px-3 rounded text-sm"
+                                    >
+                                        <i class="fas fa-file-excel mr-1"></i>
+                                        Excel
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-xl p-6 card-shadow">
+                                <div class="flex items-center mb-4">
+                                    <div
+                                        class="rounded-lg bg-green-100 p-3 mr-4"
+                                    >
+                                        <i
+                                            class="fas fa-syringe text-2xl text-green-500"
+                                        ></i>
+                                    </div>
+                                    <h3 class="text-lg font-semibold">
+                                        Laporan Imunisasi
+                                    </h3>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">
+                                    Generate laporan imunisasi dan cakupan
+                                    vaksinasi.
+                                </p>
+                                <div class="flex space-x-2">
+                                    <button
+                                        class="flex-1 bg-posyandu hover:bg-posyanduDark text-white py-2 px-3 rounded text-sm"
+                                    >
+                                        <i class="fas fa-file-pdf mr-1"></i> PDF
+                                    </button>
+                                    <button
+                                        class="flex-1 bg-success hover:bg-green-600 text-white py-2 px-3 rounded text-sm"
+                                    >
+                                        <i class="fas fa-file-excel mr-1"></i>
+                                        Excel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const menuToggle = document.getElementById("menu-toggle");
+                const sidebar = document.querySelector(".sidebar");
+                const overlay = document.getElementById("overlay");
+
+                // Toggle mobile sidebar
+                menuToggle.addEventListener("click", function () {
+                    sidebar.classList.toggle("active");
+                    overlay.classList.toggle("active");
+                });
+
+                overlay.addEventListener("click", function () {
+                    sidebar.classList.remove("active");
+                    overlay.classList.remove("active");
+                });
+
+                // Tab functionality
+                const tabs = ["pemeriksaan", "jadwal", "laporan"];
+
+                tabs.forEach((tab) => {
+                    const tabElement = document.getElementById(`${tab}-tab`);
+                    const contentElement = document.getElementById(
+                        `${tab}-content`
+                    );
+
+                    tabElement.addEventListener("click", function () {
+                        // Remove active class from all tabs and contents
+                        tabs.forEach((t) => {
+                            document
+                                .getElementById(`${t}-tab`)
+                                .classList.remove(
+                                    "border-posyandu",
+                                    "text-posyandu"
+                                );
+                            document
+                                .getElementById(`${t}-tab`)
+                                .classList.add(
+                                    "border-transparent",
+                                    "text-gray-500"
+                                );
+                            document
+                                .getElementById(`${t}-content`)
+                                .classList.remove("active");
+                        });
+
+                        // Add active class to clicked tab and content
+                        this.classList.add("border-posyandu", "text-posyandu");
+                        this.classList.remove(
+                            "border-transparent",
+                            "text-gray-500"
+                        );
+                        contentElement.classList.add("active");
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>
