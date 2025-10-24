@@ -12,6 +12,8 @@ class ViewData extends Controller
     {
         $balitas = Balita::all();
         $ibu_hamils = IbuHamil::all();
-        return view('kader.data-peserta', compact('balitas', 'ibu_hamils'));
+        $totalBalita = Balita::count();
+        $totalIbuHamil = IbuHamil::count();
+        return view('kader.data-peserta', compact('balitas', 'ibu_hamils', 'totalBalita', 'totalIbuHamil'));
     }
 }

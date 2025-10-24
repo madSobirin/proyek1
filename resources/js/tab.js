@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Inisialisasi tampilan awal
     tabs.forEach((t) => {
-        t.classList.remove("border-posyandu", "text-posyandu");
+        t.classList.remove("border-posyanduu", "text-posyanduu");
         t.classList.add("border-transparent", "text-gray-500");
     });
     contents.forEach((c) =>
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const defaultTab = document.getElementById("balita-tab");
     const defaultContent = document.getElementById("balita-content");
 
-    defaultTab.classList.add("text-posyandu");
+    defaultTab.classList.add("text-posyanduu");
     defaultContent.classList.remove("hidden");
     setTimeout(() => {
         defaultContent.classList.remove("opacity-0", "translate-y-2");
@@ -50,11 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
         tab.addEventListener("click", () => {
             // Update style tab
             tabs.forEach((t) => {
-                t.classList.remove("text-posyandu");
+                t.classList.remove("text-posyanduu");
                 t.classList.add("text-gray-500");
             });
             tab.classList.remove("text-gray-500");
-            tab.classList.add("text-posyandu");
+            tab.classList.add("text-posyanduu");
 
             // Animasi underline
             setUnderline(tab);

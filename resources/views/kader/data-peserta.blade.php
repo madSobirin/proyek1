@@ -23,11 +23,11 @@
             <div class="border-b border-gray-200">
                 <nav class="flex -mb-px">
                     <button id="balita-tab"
-                        class="tab-button py-4 px-6 text-center border-b-2 border-posyanduu font-medium text-sm whitespace-nowrap text-posyanduu hover:text-buttonhover">
+                        class="tab-button py-4 px-6 text-center border-b-2 border-posyanduu font-medium text-sm whitespace-nowrap  hover:text-gray-700">
                         Data Balita
                     </button>
                     <button id="ibu-hamil-tab"
-                        class="tab-button py-4 px-6 text-center border-b-2 border-posyanduu font-medium text-sm whitespace-nowrap text-posyanduu hover:text-buttonhover">
+                        class="tab-button py-4 px-6 text-center border-b-2 border-posyanduu font-medium text-sm whitespace-nowrap  hover:text-gray-700">
                         Data Ibu Hamil
                     </button>
                 </nav>
@@ -41,26 +41,26 @@
                 <div class="overflow-x-auto">
                     <table class="w-full">
                         <thead>
-                            <tr class="text-left border-b text-gray-800 text-sm">
-                                <th class="pb-3 font-medium">
+                            <tr class="text-left border-b text-gray-600 text-sm">
+                                <th class="pb-3 ">
                                     NIK
                                 </th>
-                                <th class="pb-3 font-medium">
+                                <th class="pb-3 ">
                                     Nama Balita
                                 </th>
-                                <th class="pb-3 font-medium">
+                                <th class="pb-3 ">
                                     Usia
                                 </th>
-                                <th class="pb-3 font-medium">
+                                <th class="pb-3 ">
                                     Jenis Kelamin
                                 </th>
-                                <th class="pb-3 font-medium">
+                                <th class="pb-3 ">
                                     Alamat
                                 </th>
-                                <th class="pb-3 font-medium">
+                                <th class="pb-3 ">
                                     Nama Orang Tua
                                 </th>
-                                <th class="pb-3 font-medium">
+                                <th class="pb-3 ">
                                     Aksi
                                 </th>
                             </tr>
@@ -121,13 +121,13 @@
                 <!-- Pagination -->
                 <div class="mt-6 flex flex-col md:flex-row justify-between items-center">
                     <p class="text-sm text-gray-600 mb-4 md:mb-0">
-                        Menampilkan 4 dari 142 data balita
+                        Menampilkan {{ $totalBalita }} dari 142 data balita
                     </p>
                     <div class="flex space-x-2">
                         <button class="px-3 py-1 rounded border border-gray-300 text-gray-600 hover:bg-gray-100">
                             <i class="fas fa-chevron-left"></i>
                         </button>
-                        <button class="px-3 py-1 rounded border border-posyandu bg-posyandu text-white">
+                        <button class="px-3 py-1 rounded border border-posyanduu bg-posyanduu text-white">
                             1
                         </button>
                         <button class="px-3 py-1 rounded border border-gray-300 text-gray-600 hover:bg-gray-100">
@@ -152,22 +152,22 @@
                     <table class="w-full">
                         <thead>
                             <tr class="text-left border-b text-gray-600 text-sm">
-                                <th class="pb-3 font-medium">
+                                <th class="pb-3 ">
                                     NIK
                                 </th>
-                                <th class="pb-3 font-medium">
+                                <th class="pb-3 ">
                                     Nama Ibu Hamil
                                 </th>
-                                <th class="pb-3 font-medium">
+                                <th class="pb-3 ">
                                     Nama Suami
                                 </th>
-                                <th class="pb-3 font-medium">
+                                <th class="pb-3 ">
                                     Umur
                                 </th>
-                                <th class="pb-3 font-medium">
+                                <th class="pb-3 ">
                                     Alamat
                                 </th>
-                                <th class="pb-3 font-medium">
+                                <th class="pb-3 ">
                                     Aksi
                                 </th>
                             </tr>
@@ -217,13 +217,13 @@
                 <!-- Pagination -->
                 <div class="mt-6 flex flex-col md:flex-row justify-between items-center">
                     <p class="text-sm text-gray-600 mb-4 md:mb-0">
-                        Menampilkan 4 dari 28 data ibu hamil
+                        Menampilkan <span>{{ $totalIbuHamil }}</span> dari 28 data ibu hamil
                     </p>
                     <div class="flex space-x-2">
                         <button class="px-3 py-1 rounded border border-gray-300 text-gray-600 hover:bg-gray-100">
                             <i class="fas fa-chevron-left"></i>
                         </button>
-                        <button class="px-3 py-1 rounded border border-posyandu bg-posyandu text-white">
+                        <button class="px-3 py-1 rounded border border-posyanduu bg-posyanduu text-white">
                             1
                         </button>
                         <button class="px-3 py-1 rounded border border-gray-300 text-gray-600 hover:bg-gray-100">
