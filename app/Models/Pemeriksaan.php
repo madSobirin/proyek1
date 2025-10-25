@@ -23,14 +23,16 @@ class Pemeriksaan extends Model
     ];
 
     // Relasi
+    // Relasi ke Balita
     public function balita()
     {
         return $this->belongsTo(Balita::class);
     }
 
-    public function ibuHamil()
+    // Relasi ke Ibu Hamil
+    public function ibu_hamil()
     {
-        return $this->belongsTo(IbuHamil::class, 'ibu_hamil_id');
+        return $this->belongsTo(IbuHamil::class);
     }
 }
 

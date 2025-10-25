@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->enum('tipe', ['balita', 'ibu_hamil']);
             $table->unsignedBigInteger('balita_id')->nullable();
             $table->unsignedBigInteger('ibu_hamil_id')->nullable();
-            $table->date('tanggal');
+            $table->dateTime('tanggal');
 
             // Untuk balita
             $table->decimal('berat_badan', 5, 2)->nullable();

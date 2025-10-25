@@ -7,6 +7,7 @@ use App\Http\Controllers\BalitaController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\IbuHamilController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PemeriksaanController;
 
 // register view
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
@@ -35,11 +36,15 @@ Route::get('/data/tambah', [PesertaController::class, 'create'])->name('peserta.
 Route::post('/data/store', [PesertaController::class, 'store'])->name('peserta.store');
 Route::delete('/peserta/{kategori}/{id}', [PesertaController::class, 'destroy'])->name('peserta.destroy');
 
-// pemeriksaan
-Route::get('/pemeriksaan', function () {
-    return view('kader.pemeriksaan');
-});
+// view pemeriksaan
+Route::get('/pemeriksaan', [PemeriksaanController::class, 'index'])->name('pemeriksaan.index');
 
+Route::get('/pemeriksaan/create', [PemeriksaanController::class, 'create'])->name('pemeriksaan.create');
+Route::post('/pemeriksaan/store', [PemeriksaanController::class, 'store'])->name('pemeriksaan.store');
+Route::get('/pemeriksaan/search', [PemeriksaanController::class, 'searchPeserta'])->name('pemeriksaan.search');
+
+// Hapus pemeriksaan
+Route::delete('/pemeriksaan/{id}', [PemeriksaanController::class, 'destroy'])->name('pemeriksaan.destroy');
 
 
 
