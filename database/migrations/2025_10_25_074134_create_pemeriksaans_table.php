@@ -15,12 +15,14 @@ return new class extends Migration {
             $table->dateTime('tanggal');
 
             // Untuk balita
-            $table->decimal('berat_badan', 5, 2)->nullable();
-            $table->decimal('tinggi_badan', 5, 2)->nullable();
+            $table->integer('berat_badan_balita')->nullable();
+            $table->integer('tinggi_badan')->nullable();
             $table->enum('status_gizi', ['Gizi Baik', 'Gizi Buruk', 'Stunting'])->nullable();
 
             // Untuk ibu hamil
-            $table->decimal('tekanan_darah', 5, 2)->nullable();
+            $table->integer('berat_badan_ibu')->nullable();
+            $table->integer('tekanan_sistolik')->nullable();
+            $table->integer('tekanan_diastolik')->nullable();
             $table->integer('usia_kehamilan')->nullable();
             $table->enum('status_ibu', ['Kondisi Baik', 'Anemia'])->nullable();
 

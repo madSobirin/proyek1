@@ -46,10 +46,12 @@ class PemeriksaanController extends Controller
             'tipe' => 'required|in:balita,ibu_hamil',
             'peserta_id' => 'required|integer',
             'tanggal' => 'required|date',
-            'berat_badan' => 'nullable|numeric',
-            'tinggi_badan' => 'nullable|numeric',
+            'berat_badan_balita' => 'nullable|integer|min:0',
+            'tinggi_badan' => 'nullable|integer|min:0',
             'status_gizi' => 'nullable|in:Gizi Baik,Gizi Buruk,Stunting',
-            'tekanan_darah' => 'nullable|numeric',
+            'berat_badan_ibu' => 'nullable|integer|min:0',
+            'tekanan_sistolik' => 'nullable|integer|min:0|max:300',
+            'tekanan_diastolik' => 'nullable|integer|min:0|max:200',
             'usia_kehamilan' => 'nullable|integer|min:0',
             'status_ibu' => 'nullable|in:Kondisi Baik,Anemia',
         ]);
@@ -57,9 +59,15 @@ class PemeriksaanController extends Controller
         if ($validated['tipe'] === 'balita') {
             $validated['balita_id'] = $validated['peserta_id'];
             $validated['ibu_hamil_id'] = null;
+
+            $validated['berat_badan_balita'] = $validated['berat_badan_balita'] ?? null;
+            $validated['berat_badan_ibu'] = null;
         } else {
             $validated['ibu_hamil_id'] = $validated['peserta_id'];
             $validated['balita_id'] = null;
+
+            $validated['berat_badan_ibu'] = $validated['berat_badan_ibu'] ?? null;
+            $validated['berat_badan_balita'] = null;
         }
 
         unset($validated['peserta_id']);
@@ -68,6 +76,8 @@ class PemeriksaanController extends Controller
 
         return redirect()->route('pemeriksaan.index')->with('success', 'Data pemeriksaan berhasil ditambahkan.');
     }
+
+
 
     // Hapus pemeriksaan
     public function destroy($id)

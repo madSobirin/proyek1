@@ -63,15 +63,15 @@
                 <!-- Input Dinamis -->
                 <div id="input-balita" class="hidden space-y-6">
                     <div>
-                        <label for="bb" class="block text-sm font-medium text-gray-700 mb-2">Berat Badan
+                        <label for="berat_badan_balita" class="block text-sm font-medium text-gray-700 mb-2">Berat Badan
                             (kg)</label>
-                        <input type="number" step="0.01" name="bb"
+                        <input type="number" step="1" min="0" name="berat_badan_balita"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-button focus:border-transparent">
                     </div>
                     <div>
-                        <label for="tb" class="block text-sm font-medium text-gray-700 mb-2">Tinggi Badan
+                        <label for="tinggi_badan" class="block text-sm font-medium text-gray-700 mb-2">Tinggi Badan
                             (cm)</label>
-                        <input type="number" step="0.01" name="tb"
+                        <input type="number" step="1" min="0" name="tinggi_badan"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-button focus:border-transparent">
                     </div>
                     <div>
@@ -89,16 +89,28 @@
 
                 <div id="input-ibu" class="hidden space-y-6">
                     <div>
-                        <label for="bb" class="block text-sm font-medium text-gray-700 mb-2">Berat Badan
+                        <label for="berat_badan_ibu" class="block text-sm font-medium text-gray-700 mb-2">Berat Badan
                             (kg)</label>
-                        <input type="number" step="0.01" name="bb"
+                        <input type="number" step="1" min="0" name="berat_badan_ibu"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-button focus:border-transparent">
                     </div>
-                    <div>
-                        <label for="tekanan_darah" class="block text-sm font-medium text-gray-700 mb-2">Tekanan
-                            Darah</label>
-                        <input type="number" step="0.01" name="tekanan_darah"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-button focus:border-transparent">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="tekanan_sistolik" class="block text-sm font-medium text-gray-700 mb-2">
+                                Tekanan Darah (Sistolik)
+                            </label>
+                            <input type="number" name="tekanan_sistolik" step="1" min="0"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-button focus:border-transparent"
+                                placeholder="120">
+                        </div>
+                        <div>
+                            <label for="tekanan_diastolik" class="block text-sm font-medium text-gray-700 mb-2">
+                                Tekanan Darah (Diastolik)
+                            </label>
+                            <input type="number" name="tekanan_diastolik" step="1" min="0"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-button focus:border-transparent"
+                                placeholder="80">
+                        </div>
                     </div>
                     <div>
                         <label for="usia_kehamilan" class="block text-sm font-medium text-gray-700 mb-2">Usia Kehamilan

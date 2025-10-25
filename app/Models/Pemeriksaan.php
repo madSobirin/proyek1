@@ -9,17 +9,8 @@ class Pemeriksaan extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'tipe',
-        'balita_id',
-        'ibu_hamil_id',
-        'tanggal',
-        'berat_badan',
-        'tinggi_badan',
-        'status_gizi',
-        'tekanan_darah',
-        'usia_kehamilan',
-        'status_ibu'
+    protected $guarded = [
+        'id',
     ];
 
     // Relasi
