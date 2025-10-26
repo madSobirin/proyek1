@@ -3,9 +3,18 @@ import Chart from "chart.js/auto";
 document.addEventListener("DOMContentLoaded", () => {
     const giziCanvas = document.getElementById("giziChart");
     const ibuHamilCanvas = document.getElementById("ibuHamilChart");
+    const chartDataEl = document.getElementById("chart-data");
+
+    let giziData = [];
+    let ibuData = [];
+
+    if (chartDataEl) {
+        giziData = JSON.parse(chartDataEl.dataset.gizi);
+        ibuData = JSON.parse(chartDataEl.dataset.ibu);
+    }
 
     // Chart Status Gizi Balita
-    if (giziCanvas) {
+    if (giziCanvas && giziData.length) {
         const ctx = giziCanvas.getContext("2d");
         new Chart(ctx, {
             type: "bar",
@@ -13,22 +22,26 @@ document.addEventListener("DOMContentLoaded", () => {
                 labels: ["Gizi Baik", "Gizi Buruk", "Stunting"],
                 datasets: [
                     {
-                        label: "Jumlah Balita",
-                        data: [80, 12, 8],
+                        data: giziData,
                         backgroundColor: ["#10B981", "#F59E0B", "#EF4444"],
                     },
                 ],
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: { y: { beginAtZero: true } },
+                plugins: {
+                    legend: {
+                        display: false,
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: { y: { beginAtZero: true } },
+                    },
+                },
             },
         });
     }
 
     // Chart Kondisi Ibu Hamil
-    if (ibuHamilCanvas) {
+    if (ibuHamilCanvas && ibuData.length) {
         const ctx = ibuHamilCanvas.getContext("2d");
         new Chart(ctx, {
             type: "doughnut",
@@ -36,8 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 labels: ["Kondisi Baik", "Anemia"],
                 datasets: [
                     {
-                        data: [20, 4],
-                        backgroundColor: ["#10B981", "#3B82F6"],
+                        data: ibuData,
+                        backgroundColor: ["#10B981", "#476EAE"],
                     },
                 ],
             },

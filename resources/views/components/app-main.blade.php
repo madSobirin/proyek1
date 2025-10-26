@@ -11,12 +11,15 @@
     {{-- Font Google ya --}}
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet" />
+
     {{-- Font Awesome --}}
     <link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}">
     @vite('resources/css/app.css')
+
 </head>
 
 <body class="bg-gray-100">
+    {{-- @dd{{ $totalGiziBaik }} --}}
     <x-sidebar />
     <main class="pt-16 md:pl-64">
         <div class="p-4">

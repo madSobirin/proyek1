@@ -32,6 +32,10 @@
             </div>
         </div>
 
+        {{-- Untuk Meletakkan Data Chart di JS jembatan antara controller dan chart.js --}}
+        <div id="chart-data" data-gizi='@json([$totalGiziBaik, $totalGiziBuruk, $totalStunting])' data-ibu='@json([$totalKondisiBaik, $totalKondisiAnemia])'>
+        </div>
+
         {{-- Chart Section --}}
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
             <!-- Status Gizi Balita Chart -->
@@ -45,6 +49,7 @@
                     <canvas id="giziChart"></canvas>
                 </div>
             </div>
+
 
             <!-- Kondisi Ibu Hamil Chart -->
             <div class="bg-white rounded-xl p-4 md:p-6 shadow-md">
